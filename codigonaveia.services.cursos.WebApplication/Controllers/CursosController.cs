@@ -1,4 +1,4 @@
-﻿using codigonaveia.services.cursos.WebApplication.enumVerbs;
+using codigonaveia.services.cursos.WebApplication.enumVerbs;
 using codigonaveia.services.cursos.WebApplication.Interfaces;
 using codigonaveia.services.cursos.WebApplication.Models;
 using Microsoft.AspNetCore.Mvc;
