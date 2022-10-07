@@ -1,4 +1,4 @@
-﻿@model IEnumerable<codigonaveia.services.cursos.WebApplication.Models.CursosViewModel>
+@model IEnumerable<codigonaveia.services.cursos.WebApplication.Models.CursosViewModel>
 
 @{
     ViewData["Title"] = "ListaCursos";  
@@ -7,6 +7,10 @@
 <h1>ListaCursos</h1>
 
 <div class="container">
+    <br />
+    <div class="mb-3">
+        @Html.ActionLink("Novo Curso","Registrar","Cursos",  null,new{@class="btn btn-primary"})
+    </div>
     <div class="card">
         <div class="card-header">
             <label>Lista de Cursos</label>
