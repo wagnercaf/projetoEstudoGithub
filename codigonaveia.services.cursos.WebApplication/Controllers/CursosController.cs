@@ -104,6 +104,20 @@ namespace codigonaveia.services.cursos.WebApplication.Controllers
             return View(mod);
         }
 
+        public async Task<IActionResult> Detalhe(int Id)
+        {
+            if (Id > 0)
+            {
+                TempData["Msg"] = "02";
+                var result = await _cursosRepository.ObterCursosPorId(Id);
+                return View(result);
+            }
+            else
+            {
+                return NotFound($"{Id} não encontrado");
+            }
+        }
+
         //public async Task<IEnumerable<CursosViewModel>?> GetCursos()
         //{
         //    using (HttpClient httpclient = new HttpClient())

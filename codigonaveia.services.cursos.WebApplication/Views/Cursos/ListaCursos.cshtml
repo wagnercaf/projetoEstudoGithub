@@ -60,34 +60,45 @@
 
 <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
 @section scripts{
-    <script>
-        $('.btnDelete').click(function(){
-            var Id= $(this).attr('data-id');
-            var Url = "/Cursos/ExcluirCurso?Id=" + Id;
-            //alert(Url);
-            if(confirm("Realmente deseja excluir este curso?")){
-                $.ajax({
-                    type:'Delete',
-                    url:Url,
-                    success: function(result){
-                        alert("Curso Excluido com sucesso!")
-                        window.location.href = "/Cursos/ListaCursos";
+        <script src="~/js/Crudcursos.js">
+        //$('.btnDelete').click(function(){
+        //    var Id= $(this).attr('data-id');
+        //    var Url = "/Cursos/ExcluirCurso?Id=" + Id;
+        //    //alert(Url);
+        //    if(confirm("Realmente deseja excluir este curso?")){
+        //        $.ajax({
+        //            type:'Delete',
+        //            url:Url,
+        //            success: function(result){
+        //                alert("Curso Excluido com sucesso!")
+        //                window.location.href = "/Cursos/ListaCursos";
                         
-                    }
-                });
-            }
-        });
+        //            }
+        //        });
+        //    }
+        //});
 
-        $('.btnUpdate').click(function(){
-            var Id= $(this).attr('data-id');
-            var Url = "/Cursos/Alterar?Id=" + Id;
-            $('#modal').load(
-                Url,
-                function(){
-                $('#modal').modal('show');
-            });
+        //$('.btnDetalhes').click(function(){
+        //    var Id= $(this).attr('data-id');
+        //    var Url = "/Cursos/Detalhe?Id=" + Id;
+        //    $('#modal').load(
+        //        Url,
+        //        function(){
+        //        $('#modal').modal('show');
+        //    });
 
-        });
+        //});
+
+        //    $('.btnUpdate').click(function(){
+        //        var Id= $(this).attr('data-id');
+        //        var Url = "/Cursos/Alterar?Id=" + Id;
+        //        $('#modal').load(
+        //            Url,
+        //            function(){
+        //            $('#modal').modal('show');
+        //        });
+
+        //    });
 
     </script>
 }
