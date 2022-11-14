@@ -64,6 +64,46 @@ namespace codigonaveia.services.cursos.WebApplication.Controllers
             //return View(await GetCursos());
         }
 
+        public async Task ExcluirCurso(int Id)
+        {
+            if (Id > 0)
+            {
+                await _cursosRepository.Delete(Id);
+            }
+        }
+        public async Task<IActionResult> Alterar(int Id)
+        {
+            if (Id > 0)
+            {
+                var result= await _cursosRepository.ObterCursosPorId(Id);
+                return View(result);
+            }
+            else
+            {
+                return NotFound($"{Id} não encontrado") ;
+            }
+            
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Alterar(int Id, CursosViewModel mod)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Id > 0)
+                {
+                    await _cursosRepository.Update(Id,mod);
+                    TempData["Msg"] = "Curso alterado com sucesso! ";
+                    return Redirect(nameof(ListaCursos));
+                }
+                else
+                {
+                    return NotFound($"{Id} não encontrado");
+                }
+            }
+            return View(mod);
+        }
+
         //public async Task<IEnumerable<CursosViewModel>?> GetCursos()
         //{
         //    using (HttpClient httpclient = new HttpClient())

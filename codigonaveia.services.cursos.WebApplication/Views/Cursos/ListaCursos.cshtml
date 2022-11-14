@@ -11,6 +11,9 @@
     <div class="mb-3">
         @Html.ActionLink("Novo Curso","Registrar","Cursos",  null,new{@class="btn btn-primary"})
     </div>
+    @if (TempData["Msg"] != null){
+            <label class="text text-success=">@TempData["Msg"] </label>
+    }
     <div class="card">
         <div class="card-header">
             <label>Lista de Cursos</label>
@@ -20,22 +23,32 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Data</th>
-                        <th>Titulo</th>
-                        <th>Descrição</th>
-                        <th>Valor</th>
+                        <td>Id</td>
+                        <td>Data</td>
+                        <td>Titulo</td>
+                        <td>Descrição</td>
+                        <td>Valor</td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <th>@item.Id</th>
-                            <th>@item.DataRegistro</th>
-                            <th>@item.Titulo</th>
-                            <th>@item.Descricao</th>
-                            <th>@item.Valor</th>
+                            <td>@item.Id</td>
+                            <td>@item.DataRegistro</td>
+                            <td>@item.Titulo</td>
+                            <td>@item.Descricao</td>
+                            <td>@item.Valor</td>
+                            <td>
+                                <button type="button" class="btn btn-danger btnDelete" data-id="@item.Id">Excluir</button>        
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-warning btnUpdate" data-id="@item.Id">Atualizar</button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger btnDetalhes" data-id="@item.Id">Detalhes</button>                                    
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -44,3 +57,37 @@
         </div>
      </div>
 </div>
+
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+@section scripts{
+    <script>
+        $('.btnDelete').click(function(){
+            var Id= $(this).attr('data-id');
+            var Url = "/Cursos/ExcluirCurso?Id=" + Id;
+            //alert(Url);
+            if(confirm("Realmente deseja excluir este curso?")){
+                $.ajax({
+                    type:'Delete',
+                    url:Url,
+                    success: function(result){
+                        alert("Curso Excluido com sucesso!")
+                        window.location.href = "/Cursos/ListaCursos";
+                        
+                    }
+                });
+            }
+        });
+
+        $('.btnUpdate').click(function(){
+            var Id= $(this).attr('data-id');
+            var Url = "/Cursos/Alterar?Id=" + Id;
+            $('#modal').load(
+                Url,
+                function(){
+                $('#modal').modal('show');
+            });
+
+        });
+
+    </script>
+}
